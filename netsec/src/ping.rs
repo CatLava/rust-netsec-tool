@@ -1,1 +1,0 @@
-// use this one https://docs.rs/pinger/latest/pinger/all.html#functions
