@@ -28,7 +28,7 @@ pub fn ping_address(address: &str) -> Option<String> {
 pub fn port_scanner(address: &str, ports: Option<&Vec<u16>>){
     // Need to check if ports
     let standard_ports = vec![21,22,25,53,80,135,139,443,445,1723,3389];
-
+    println!("Searching on address : {}", address);
     let search_ports = match ports {
         Some(ports) => ports,
         _ => &standard_ports
