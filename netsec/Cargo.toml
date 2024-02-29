@@ -10,3 +10,4 @@ clap = { version = "4.5.0", features = ["derive"] }
 ping-rs = "0.1.2"
 pinger = "1.1.0"
 pnet = "0.34.0"
+rayon = "1.8.1"
