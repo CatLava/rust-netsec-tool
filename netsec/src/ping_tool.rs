@@ -12,9 +12,9 @@ pub fn ping_address(address: &str) -> Option<String> {
             return valid_addr
         }
         match message {
-            PingResult::Pong(duration, _) => {println!("{:?} : {:?}", duration, address);
+            PingResult::Pong(duration, _) => {//println!("{:?} : {:?}", duration, address);
                                                 valid_addr = Some(address.to_string())},
-            PingResult::Timeout(_) => println!("Timeout!"),
+            PingResult::Timeout(_) => (),
             // Unknown lines, just ignore.
             PingResult::Unknown(line) => (),
             PingResult::PingExited(_, _) => todo!()
@@ -43,8 +43,8 @@ pub fn port_scanner(address: &str, ports: Option<&Vec<u16>>){
         match TcpStream::connect_timeout(&socket_addr, std::time::Duration::from_secs(1)) {
             Ok(_) => println!("Port {} is open", port),
             Err(e) => match e.kind() {
-                ErrorKind::TimedOut => println!("Port {} is closed", port),
-                _ => println!("Failed to connect: {}", e),
+                ErrorKind::TimedOut => (),//println!("Port {} is closed", port),
+                _ => (),//println!("Failed to connect: {}", e),
             },
         }
     }
