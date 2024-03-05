@@ -2,7 +2,10 @@ use std::time::Duration;
 use ping_rs::*;
 use std::net::{IpAddr, Ipv4Addr};
 use rayon::prelude::*;
+use clap::Parser;
 
+
+mod cli;
 mod networking;
 mod ping_tool;
 
@@ -12,6 +15,10 @@ fn main() {
     // need a cidr map or default to /24 
     // 1. Discover devices on network with ping
     networking::list_interfaces();
+    let args: cli::NetInputs  = cli::NetInputs::parse();
+    let mut ip = args.ip.unwrap().split(".");
+    println!("Ip {:?}",ip);
+
     let base_ip = Ipv4Addr::new(192, 168, 1, 1);
     println!("Scanning {:?} for /24 network", &base_ip);
     let mut valid_ips: Vec<String> = (1..254)
