@@ -8,6 +8,7 @@ use clap::Parser;
 mod cli;
 mod networking;
 mod ping_tool;
+mod utils;
 
 fn main() {
     println!("Hello, world!");
@@ -16,15 +17,14 @@ fn main() {
     // 1. Discover devices on network with ping
     networking::list_interfaces();
     let args: cli::NetInputs  = cli::NetInputs::parse();
-    let mut ip = args.ip.unwrap().split(".");
-    println!("Ip {:?}",ip);
+    let mut base_ip: Option<Vec<u8>> = utils::validate_str_to_ip(args.ip.unwrap());
+    println!("Ip {:?}", base_ip);
 
-    let base_ip = Ipv4Addr::new(192, 168, 1, 1);
     println!("Scanning {:?} for /24 network", &base_ip);
     let mut valid_ips: Vec<String> = (1..254)
         .into_par_iter()
         .map(|x| {
-        let test_ip = Ipv4Addr::new(base_ip.octets()[0], base_ip.octets()[1], base_ip.octets()[2], x);
+        let test_ip = Ipv4Addr::new(base_ip[0], base_ip[1], base_ip[2], x);
         // println!("{:?}", test_ip);
         let ip = ping_tool::ping_address(&test_ip.to_string());
         ip
