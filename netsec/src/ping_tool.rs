@@ -49,24 +49,5 @@ pub fn port_scanner(address: &str, ports: Option<&Vec<u16>>){
         }
     }
     return
-
-
-// fn main() {
-//     let target = "127.0.0.1";
-//     let port = 80;
-//     let addr = format!("{}:{}", target, port);
-//     let socket_addr = match addr.parse::<SocketAddr>() {
-//         Ok(addr) => addr,
-//         Err(e) => panic!("Failed to parse address: {}", e),
-//     };
-
-//     match TcpStream::connect_timeout(&socket_addr, std::time::Duration::from_secs(1)) {
-//         Ok(_) => println!("Port {} is open", port),
-//         Err(e) => match e.kind() {
-//             ErrorKind::TimedOut => println!("Port {} is closed", port),
-//             _ => println!("Failed to connect: {}", e),
-//         },
-//     }
-// }
 }
 

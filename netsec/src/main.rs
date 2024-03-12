@@ -11,13 +11,12 @@ mod ping_tool;
 mod utils;
 
 fn main() {
-    println!("Hello, world!");
     // CLI tool to take in network cidr
     // need a cidr map or default to /24 
     // 1. Discover devices on network with ping
-    networking::list_interfaces();
+    // networking::list_interfaces();
     let args: cli::NetInputs  = cli::NetInputs::parse();
-    let mut base_ip: Option<Vec<u8>> = utils::validate_str_to_ip(args.ip.unwrap());
+    let mut base_ip: Vec<u8> = utils::validate_str_to_ip(args.ip.unwrap()).expect("Invalid IP input");
     println!("Ip {:?}", base_ip);
 
     println!("Scanning {:?} for /24 network", &base_ip);
